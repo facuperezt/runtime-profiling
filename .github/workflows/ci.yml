@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            compiler: g++
+            cxx_standard: 14
+          - os: ubuntu-latest
+            compiler: g++
+            cxx_standard: 17
+          - os: ubuntu-latest
+            compiler: clang++
+            cxx_standard: 14
+          - os: ubuntu-latest
+            compiler: clang++
+            cxx_standard: 17
+
+    runs-on: ${{ matrix.os }}
+    name: "${{ matrix.compiler }} C++${{ matrix.cxx_standard }}"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: |
+          cmake -B build \
+            -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} \
+            -DCMAKE_CXX_STANDARD=${{ matrix.cxx_standard }} \
+            -DEMBPROF_BUILD_TESTS=ON \
+            -DEMBPROF_BUILD_EXAMPLES=ON
+
+      - name: Build
+        run: cmake --build build -j$(nproc)
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure

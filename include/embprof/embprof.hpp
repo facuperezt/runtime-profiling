@@ -12,6 +12,8 @@
 #include "profiling_point.hpp"
 #include "registry.hpp"
 #include "serialize.hpp"
+#include "output.hpp"
+#include "formatter.hpp"
 #include "macros.hpp"
 
 #endif // EMBPROF_HPP

@@ -55,6 +55,7 @@ if(EMBPROF_BUILD_TESTS)
         tests/test_registry.cpp
         tests/test_serialize.cpp
         tests/test_scoped_timer.cpp
+        tests/test_output.cpp
     )
     target_link_libraries(embprof_tests PRIVATE embprof Catch2::Catch2WithMain)
     target_compile_features(embprof_tests PRIVATE cxx_std_17)

@@ -60,9 +60,15 @@ if(EMBPROF_BUILD_TESTS)
     target_link_libraries(embprof_tests PRIVATE embprof Catch2::Catch2WithMain)
     target_compile_features(embprof_tests PRIVATE cxx_std_17)
 
+    # Lite header gets its own executable to avoid ODR conflicts
+    add_executable(embprof_lite_tests tests/test_lite_standalone.cpp)
+    target_link_libraries(embprof_lite_tests PRIVATE Catch2::Catch2WithMain)
+    target_compile_features(embprof_lite_tests PRIVATE cxx_std_17)
+
     include(CTest)
     include(Catch)
     catch_discover_tests(embprof_tests)
+    catch_discover_tests(embprof_lite_tests)
 endif()
 
 # ---------------------------------------------------------------------------

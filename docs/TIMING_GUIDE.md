@@ -390,6 +390,8 @@ The Instrumentation Trace Macrocell sends data through the SWO pin to your debug
 
 embprof's `itm_sink<0>` writes directly to ITM port 0. Use `report_summary()` for a compact single-line output per profiling point.
 
+For a complete walkthrough of setting up ITM output with iSYSTEM winIDEA and the BlueBox, see [WINIDEA_ITM_GUIDE.md](WINIDEA_ITM_GUIDE.md).
+
 ### UART
 
 Classic approach. Use embprof's `callback_sink` with your UART TX function.
